@@ -7,22 +7,34 @@ using System.Threading.Tasks;
 
 namespace practica3
 {
-    internal class ClassEntrada
+    public class ClassEntrada
     {
         public class InputValidator
         {
-            // Método para validar si una cadena contiene solo números
+            //  validar si una cadena contiene solo números
             public bool EsSoloNumeros(string texto)
             {
                 return Regex.IsMatch(texto, @"^\d+$");
             }
 
-            // Método para validar si una cadena contiene solo letras
+            //  validar si una cadena contiene solo letras
             public bool EsSoloLetras(string texto)
             {
                 return Regex.IsMatch(texto, @"^[A-Za-z]+$");
             }
         }
+
+        public bool ValidarEntrada(string entrada)
+        {
+            // validaciom
+            if (string.IsNullOrEmpty(entrada))
+            {
+                return false; // entrada no válida
+            }
+           
+            return true; // entrada válida
+        }
     }
+
 
 }

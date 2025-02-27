@@ -7,24 +7,41 @@ using System.Threading.Tasks;
 
 namespace practica3
 {
-    internal class ClassRFC
+    public class ClassRFC
     {
-        public class RFCValidator
+        
+    //  validar si el RFC tiene el formato correcto
+    public bool EsRFCValido(string rfc)
         {
-            // Método para validar si el RFC tiene el formato correcto
-            public bool EsRFCValido(string rfc)
-            {
-                // Expresión regular para validar el formato de RFC
-                string patronRFC = @"^[A-Z]{4}\d{6}[A-Z0-9]{3}$";
-                return Regex.IsMatch(rfc.ToUpper(), patronRFC);
-            }
+            // expresión  para validar el formato de RFC
+            string patronRFC = @"^[A-Z]{4}\d{6}[A-Z0-9]{3}$";
+            return Regex.IsMatch(rfc, patronRFC);
+        }
 
-            // Método para corregir errores comunes en la captura de RFCs
-            public string CorregirRFC(string rfc)
+        // corregir errores comunes en la captura de RFC
+        public string CorregirRFC(string rfc)
+        {
+            // convierte el RFC a mayúsculas y elimina espacios en blanco
+            return rfc.Trim().ToUpper();
+        }
+
+        
+        public bool ValidarRFC(string rfc)
+        {
+            try
             {
-                // Convierte el RFC a mayúsculas y elimina espacios en blanco
-                return rfc.Trim().ToUpper();
+                // corrige errores en la captura del RFC
+                string rfcCorregido = CorregirRFC(rfc);
+
+                // valida si el RFC tiene el formato correcto
+                return EsRFCValido(rfcCorregido);
+            }
+            catch (Exception)
+            {
+                // si ocurre un error se considera que el RFC no es válido
+                return false;
             }
         }
+
     }
 }
